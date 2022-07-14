@@ -5,6 +5,7 @@
             <h2>Login</h2>
             <LoginForm @login="enterChat" />
             <p>No account yet? <span @click="showLogin = false">Signup</span> instead</p>
+            <button @click="googleSignIn">Log in with Google</button>
         </div>
         <div v-else>
             <h2>Sign up</h2>
@@ -19,6 +20,7 @@ import SignupForm from '../components/SignupForm.vue'
 import LoginForm from '../components/LoginForm.vue'
 import { ref } from '@vue/reactivity'
 import { useRouter } from 'vue-router'
+import firebase from 'firebase/app'
 
 export default {
     components: { SignupForm, LoginForm },
@@ -31,7 +33,19 @@ export default {
             router.push({ name: 'chatroom' })
         }
 
-        return { showLogin, enterChat }
+        // Signing in with Google
+        const googleSignIn = () => {
+            let provider = new firebase.auth.GoogleAuthProvider()
+            firebase.auth().signInWithPopup(provider)
+                .then(() => {
+                    router.push({ name: 'chatroom' })
+                })
+            .catch((err) => {
+                console.log(err)
+            });
+        }
+
+        return { showLogin, enterChat, googleSignIn }
     }
  }
 </script>

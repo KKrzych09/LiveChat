@@ -1,4 +1,4 @@
-# live-chat
+# LiveChat - Mobile Systems Programming project
 
 ## Project setup
 ```

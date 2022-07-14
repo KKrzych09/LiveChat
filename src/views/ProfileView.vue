@@ -1,20 +1,17 @@
 <template>
-    <div class="container" v-if="user">
-        <div class="card" v-if="showProfile">
+    <div class="container">
+        <div class="card">
                 <div class="card-img">
                     <img src="#" alt="#">
                 </div>
 
                 <div class="user-data">
+                    <button>Change profile picture</button>
                     <h2>{{ user.displayName }}</h2>
                     <span>{{ user.email }}</span>
-                    <button @click="showProfile = false">Change password</button>
                 </div>
 
             <button class="back">Back</button>
-        </div>
-        <div v-else>
-            <ChangePassword />
         </div>
     </div>
 </template>
@@ -23,12 +20,9 @@
 import getUser from '@/composables/getUser'
 import { useRouter } from 'vue-router'
 import { ref, watch } from '@vue/runtime-core'
-import ChangePassword from '../components/ChangePassword.vue'
 
 export default {
-    components: { ChangePassword },
     setup() {
-        const showProfile = ref(true)
         const { user } = getUser()
         const router = useRouter()
 
@@ -38,7 +32,7 @@ export default {
             }
         })
 
-        return { user, showProfilej }
+        return { user }
     }
 }
 </script>
