@@ -16,7 +16,7 @@ const signup = async (email, password, displayName) => {
     if (!res) {
       throw new Error('Could not complete signup')
     }
-    await res.user.updateProfile({ displayName })
+    await res.user.updateProfile({ displayName, photoURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Placeholder_no_text.svg/150px-Placeholder_no_text.svg.png' })
     error.value = null;
     
     return res

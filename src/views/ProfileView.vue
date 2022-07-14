@@ -2,11 +2,10 @@
     <div class="container">
         <div class="card">
                 <div class="card-img">
-                    <img src="#" alt="#">
+                    <img :src="`${user.photoURL}`">
                 </div>
 
                 <div class="user-data">
-                    <button>Change profile picture</button>
                     <h2>{{ user.displayName }}</h2>
                     <span>{{ user.email }}</span>
                 </div>

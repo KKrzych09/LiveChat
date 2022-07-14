@@ -18,6 +18,7 @@ export default {
     const displayName = ref('')
     const email = ref('')
     const password = ref('')
+    const photoURL = ref(null)
 
     // useSignup
     const { error, signup } = useSignup()
@@ -29,7 +30,7 @@ export default {
       }
     }
 
-    return { displayName, email, password, handleSubmit, error }
+    return { displayName, email, password, handleSubmit, error, photoURL }
   }
 }
 </script>

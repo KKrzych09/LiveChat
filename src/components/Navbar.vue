@@ -5,7 +5,8 @@
         <p class="email">Currently logged in as {{ user.email }}</p>
     </div>
     <div class="profile">
-        <button>My Profile</button>
+        <button>Profile</button>
+        <hr>
         <button @click="handleClick">Logout</button>
     </div>
   </nav>

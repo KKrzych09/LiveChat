@@ -13,12 +13,14 @@ import NewChatForm from '../components/NewChatForm.vue'
 import ChatWindow from '../components/ChatWindow.vue'
 import getUser from '../composables/getUser'
 import { useRouter } from 'vue-router'
+import getCollection from '@/composables/getCollection'
 
 export default {
     components: { Navbar, NewChatForm, ChatWindow },
     setup() {
       const { user } = getUser()
       const router = useRouter()
+      const { error, documents } = getCollection('messages')
 
       watch(user, () => {
         if (!user.value) {
@@ -26,7 +28,7 @@ export default {
         }
       })
 
-      return { user }
+      return { user, error, documents }
     }
 }
 </script>

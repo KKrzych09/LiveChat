@@ -4,11 +4,11 @@
     <div v-if="documents" class="messages" ref="messages">
         <div v-for="doc in formattedDocuments" :key="doc.id" class="single">
             <span class="created-at">{{ doc.createdAt }}</span>
-            <span class="profilePic">
-                <img src="#" alt="#">
-            </span>
             <span class="name">{{ doc.name }}</span>
             <span class="message">{{ doc.message }}</span>
+            <span v-if="doc.imageUrl" class="image">
+                <img :src="doc.imageUrl">
+            </span>
         </div>
     </div>
   </div>
@@ -32,13 +32,12 @@ export default {
             }
         })
 
-        // auto scroll to bottom of messages
+        // auto-scroll to bottom of messages
         const messages = ref(null)
-
         onUpdated(() => {
             messages.value.scrollTop = messages.value.scrollHeight
         })
-
+        
         return { error, documents, formattedDocuments, messages }
     }
 }
@@ -58,21 +57,21 @@ export default {
         font-size: 12px;
         margin-bottom: 4px;
     }
-    .profilePic img {
-        height: 40px;
-        width: 40px;
-        margin-right: 12px;
-        border-radius: 50%;
-        display: inline-block;
-        box-shadow: 2px 4px 6px rgba(28, 6, 49, 0.1);
-        background: white;
-    }
     .name {
         font-weight: bold;
         margin-right: 6px;
     }
     .messages {
-        max-height: 400px;
+        max-height: 350px;
         overflow: auto;
     }
+    .image img {
+        max-width: auto;
+        max-height: 250px;
+        /* width: fit-content;
+        object-fit: cover; */
+        display: flex;
+        padding-top: 10px;
+    }
+
 </style>
