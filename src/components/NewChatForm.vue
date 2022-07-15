@@ -57,6 +57,8 @@ export default {
                 })
             }
 
+            navigator.vibrate(200)
+
             if (!error.value) {
                 message.value = ''
             }

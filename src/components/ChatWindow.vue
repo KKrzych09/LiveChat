@@ -61,6 +61,10 @@ export default {
         font-weight: bold;
         margin-right: 6px;
     }
+    .location{
+        font-size: 10px;
+        margin-right: 6px;
+    }
     .messages {
         max-height: 350px;
         overflow: auto;
