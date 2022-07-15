@@ -1,18 +1,19 @@
 <template>
   <form>
-    <div class="sendText">
-        <textarea placeholder="Type a message and click enter to send..." 
-            v-model="message" 
-            @keypress.enter.prevent="handleSubmit"
-            >
-        </textarea>
-        <label>Upload image</label>
-        <input type="file" @change="handleChange">
+    <div class="text-area">
+        <textarea placeholder="Type a message and click a button to send..." v-model="message"></textarea>
+            <div class="send-text">
+                <label>
+                    <span class="material-icons">photo_camera</span>
+                    <span v-if="file !== null" class="material-icons done">done</span>
+                    <input hidden type="file" @change="handleChange">
+                </label>
+                <button @click.prevent="handleSubmit">Send</button>
+            </div>
     </div>
     
     <div class="error">{{ fileError }}</div>
     <div class="error" >{{ error }}</div>
-    <!-- <button @click="handleSubmit">Send a message</button> -->
   </form>
 </template>
 
@@ -74,17 +75,39 @@ export default {
             }
         }
 
-        return { message, handleSubmit, error, handleChange, fileError }
+        return { message, handleSubmit, error, handleChange, fileError, file}
     }
 }
 </script>
 
 <style scoped>
+    .text-area {
+        display: flex;
+    }
+    .send-text {
+        display: flex;
+        flex-direction: column;
+    }
+    .send-text button {
+        margin-bottom: 10px;
+    }
+    .send-text label {
+        display: flex;
+        max-width: 24px;
+        margin: 0 0 5px 20px;
+        padding: 0;
+    }
+    .send-text label:hover {
+        cursor: pointer;
+    }
+    .material-icons.done {
+        margin-left: 10px;
+    }
     form {
         margin: 10px;
     }
     textarea {
-        width: 100%;
+        width: 75%;
         max-width: 100%;
         margin-bottom: 6px;
         padding: 10px;
@@ -94,17 +117,18 @@ export default {
         font-family: inherit;
         outline: none;
     }
-    /* .sendText {
-        margin-bottom: 20px;
-    } */
+    button {
+        margin-left: 20px;
+    }
     input[type="file"] {
-    border: 0;
-    margin-bottom: 20px;
-    padding: 10px;
+        border: 0;
+        padding: 10px;
+        margin-left: 10px;
+        margin-left: 2;
     }
     label {
         display: block;
-        margin-top: 30px;
+        margin-top: 10px;
         padding-left: 10px;
     }
 </style>

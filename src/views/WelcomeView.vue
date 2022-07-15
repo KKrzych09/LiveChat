@@ -4,8 +4,8 @@
         <div v-if="showLogin">
             <h2>Login</h2>
             <LoginForm @login="enterChat" />
-            <p>No account yet? <span @click="showLogin = false">Signup</span> instead</p>
             <button @click="googleSignIn">Log in with Google</button>
+            <p>No account yet? <span @click="showLogin = false">Signup</span> instead</p>
         </div>
         <div v-else>
             <h2>Sign up</h2>
@@ -72,13 +72,12 @@ export default {
         outline: none;
         color: #999;
         margin: 10px auto;
+        box-sizing: border-box;
     }
     .welcome span {
         font-weight: bold;
         text-decoration: underline;
         cursor: pointer;
     }
-    .welcome button {
-        margin: 20px auto;
-    }
+
 </style>

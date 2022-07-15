@@ -66,11 +66,9 @@ export default {
         overflow: auto;
     }
     .image img {
-        max-width: auto;
-        max-height: 250px;
-        /* width: fit-content;
-        object-fit: cover; */
-        display: flex;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
         padding-top: 10px;
     }
 

@@ -7,6 +7,8 @@ import './assets/main.css'
 // Import firebase auth service
 import { projectAuth } from './firebase/config'
 
+import './registerServiceWorker'
+
 let app
 
 projectAuth.onAuthStateChanged(() => {

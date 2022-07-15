@@ -5,30 +5,26 @@
         <p class="email">Currently logged in as {{ user.email }}</p>
     </div>
     <div class="profile">
-        <button>Profile</button>
-        <hr>
-        <button @click="handleClick">Logout</button>
+        <button @click="handleProfile">Profile</button>
     </div>
   </nav>
 </template>
 
 <script>
-import useLogout from '../composables/useLogout'
 import getUser from '../composables/getUser'
+import { useRouter } from 'vue-router'
 
 export default {
     setup() {
-        const { logout, error } = useLogout()
         const { user } = getUser()
+        const router = useRouter()
 
-        const handleClick = async () => {
-            await logout()
-            if (!error.value) {
-                console.log('user logged out')
-            }
+        const handleProfile = () => {
+            router.push({ name: 'profile' })
         }
 
-        return { handleClick, user }
+
+        return { handleProfile, user }
     }
 }
 </script>
