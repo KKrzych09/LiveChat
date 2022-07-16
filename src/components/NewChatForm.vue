@@ -23,22 +23,16 @@ import getUser from '@/composables/getUser'
 import useCollection from '@/composables/useCollection'
 import { timestamp } from '@/firebase/config'
 import useStorage from '@/composables/useStorage'
-
 export default {
     setup() {
         const { user } = getUser()
         const { addDoc, error } = useCollection('messages')
         const { url, filePath, uploadImage } = useStorage()
-
         const file = ref(null)
         const fileError = ref(null)
-
         const message = ref('')
-
-
         // Allowed file types
         const types = ['image/png', 'image/jpeg']
-
         const handleSubmit = async () => {
             if (file.value) {
                 await uploadImage(file.value)
@@ -56,14 +50,11 @@ export default {
                     createdAt: timestamp(),
                 })
             }
-
             navigator.vibrate(200)
-
             if (!error.value) {
                 message.value = ''
             }
         }
-
         const handleChange = (e) => {
             const selected = e.target.files[0]
             console.log(selected)
@@ -76,7 +67,6 @@ export default {
                 fileError.value = 'Please select an image file (png or jpg)'
             }
         }
-
         return { message, handleSubmit, error, handleChange, fileError, file}
     }
 }
@@ -134,3 +124,101 @@ export default {
         padding-left: 10px;
     }
 </style>
+
+
+<!-- 
+<template>
+  <form action="#" @submit.prevent="handleSubmit()">
+    <div class="text-area">
+        <textarea placeholder="Type a message and click a button to send..." v-model="message"></textarea>
+            <div class="send-text">
+                <label>
+                    <span class="material-icons" @click="pickImg()">photo_camera</span>
+                    <span v-if="file !== null" class="material-icons done">done</span>
+                </label>
+                <button type="submit">Send</button>
+            </div>
+    </div>
+    
+    <div class="error">{{ fileError }}</div>
+    <div class="error" >{{ error }}</div>
+  </form>
+</template>
+
+<script>
+import { ref } from '@vue/reactivity'
+import getUser from '@/composables/getUser'
+import useCollection from '@/composables/useCollection'
+import { timestamp } from '@/firebase/config'
+import useStorage from '@/composables/useStorage'
+
+export default {
+    setup() {
+        const { user } = getUser()
+        const { addDoc, error } = useCollection('messages')
+        const { url, filePath, uploadImage } = useStorage()
+
+        const file = ref(null)
+        const fileError = ref(null)
+
+        function pickImg() {
+            const input = document.createElement("input");
+            input.accept = "image/jpeg";
+            input.type = "file";
+            input.onclick = () => {
+                file.value = input.files[0];
+            };
+            input.click();
+        }
+
+        const message = ref('')
+
+
+        // Allowed file types
+        const types = ['image/png', 'image/jpeg']
+
+        const handleSubmit = async () => {
+            try {
+                if (file.value) {
+                    await uploadImage(file.value)
+                    await addDoc({
+                        name: user.value.displayName,
+                        message: message.value,
+                        createdAt: timestamp(),
+                        imageUrl: url.value,
+                        filePath: filePath.value //in case of delete img
+                    })
+                } else {
+                    await addDoc({
+                        name: user.value.displayName,
+                        message: message.value,
+                        createdAt: timestamp(),
+                    })
+                }}
+
+                file.value = null;
+                fileError.value = null;
+                message.value = '';
+            } catch(err) {}
+
+            navigator.vibrate(200)
+        }
+
+        const handleChange = (e) => {
+            const selected = e.target.files[0]
+            console.log(selected)
+            // Tracking if file was selected
+            if (selected && types.includes(selected.type)) {
+                file.value = selected
+                fileError.value = null
+            } else {
+                file.value = null
+                fileError.value = 'Please select an image file (png or jpg)'
+            }
+        }
+
+        return { message, handleSubmit, error, handleChange, fileError, file}
+    }
+}
+</script>
+-->
